@@ -40,6 +40,7 @@ const createDownloadLink = () => {
   __log("Sending Data...")
   recorder && recorder.exportWAV((blob : Blob) => {
     let fd = new FormData()
+    console.log('set FormData')
     fd.append('data', blob)
     $.ajax({
       type: 'POST',
@@ -48,9 +49,11 @@ const createDownloadLink = () => {
       processData: false,
       contentType: false
     }).done((data) => {
-      console.dir(data)
+      console.log('response from server')
       __log(data.data)
+      console.dir(data)
       recorder.clear()
+      console.log('recorder object removed')
       }
     )
   })
