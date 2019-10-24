@@ -1,6 +1,11 @@
 .vscode
 .DS_Store
 *.wav
+node_modules/
+
+# nodejs
+
+node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
