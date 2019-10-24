@@ -1,0 +1,27 @@
+{
+  "name": "audiosamplecollector",
+  "version": "1.0.0",
+  "description": "## packages",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atsukoba/AudioSampleCollector.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atsukoba/AudioSampleCollector/issues"
+  },
+  "homepage": "https://github.com/atsukoba/AudioSampleCollector#readme",
+  "dependencies": {
+    "@types/jquery": "^3.3.31"
+  }
+}
