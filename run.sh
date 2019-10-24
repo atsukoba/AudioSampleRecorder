@@ -9,6 +9,9 @@ pip3 install -r requirements.txt
 
 tmux kill-server
 
+echo "transpile typescript files"
+tsc
+
 echo "Create tmux session for python api"
 tmux new-session -d -s flask 'python3 run.py'
 
