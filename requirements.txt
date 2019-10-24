@@ -1,3 +1,4 @@
 flask
 flask-ngrok
 qrcode
+Image
