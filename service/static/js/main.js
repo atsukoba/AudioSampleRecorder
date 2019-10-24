@@ -1,68 +1,104 @@
 "use strict";
 
-const DURATION = 10000;
+let audio_context;
+let recorder;
 
-navigator.getUserMedia = (navigator.getUserMedia ||
-  navigator.webkitGetUserMedia ||
-  navigator.mozGetUserMedia ||
-  navigator.msGetUserMedia);
 
-document.querySelector("#startButton").addEventListener('click', () => {
-  navigator.getUserMedia({
-    audio: true,
-    video: false
-  }, succeedStartRecord, errorRecord);
-})
+const __log = (e, data) => {
+  log.innerHTML += "\n" + e + " " + (data || '');
+}
 
-const succeedStartRecord = (stream) => {
-  const recorder = new MediaRecorder(stream, {
-    // mimeType: 'video/webm;codecs=vp9'
-    mimeType: "audio/webm"
-  });
+const startUserMedia = (stream) => {
+  audio_context = new AudioContext;
+    __log('Audio context set up.');
+  let input = audio_context.createMediaStreamSource(stream);
+  console.log('Media stream created.');
+  __log('Media stream created.');
+  // Uncomment if you want the audio to feedback directly
+  // input.connect(audio_context.destination);
+  // console.log('Input connected to audio context destination.');
+  recorder = new Recorder(input);
+  console.log('Recorder initialised.');
+  __log('Recorder initialised.');
+}
 
-  let chunks = [];
+const startRecording = (button) => {
+  recorder && recorder.record();
+  console.log('Recording...');
+  __log('Recording...');
+}
 
-  recorder.addEventListener('dataavailable', (ele) => {
-    if (ele.data.size > 0) {
-      chunks.push(ele.data);
-    }
-  });
+document.querySelector("#startButton").addEventListener('click', startRecording);
 
-  recorder.addEventListener('stop', () => {
-    let dl = document.querySelector("#dl");
-    let blobData = new Blob(chunks, {type: 'audio/wav'});
+const stopRecording = (button) => {
+  recorder && recorder.stop();
+  console.log('Stopped recording.');
+  __log('Stopped recording.');
+  // create WAV download link using audio data blob
+  createDownloadLink();
+  recorder.clear();
+}
 
-    dl.href = URL.createObjectURL(blobData);
-    dl.download = 'sample.wav';
+document.querySelector("#stopButton").addEventListener('click', stopRecording);
 
+const createDownloadLink = () => {
+  recorder && recorder.exportWAV((blob) => {
     let fd = new FormData();
-    fd.append('fname', 'test.wav');
-    fd.append('data', blobData);
+    fd.append('data', blob);
     $.ajax({
       type: 'POST',
       url: '/',
       data: fd,
       processData: false,
       contentType: false
-    }).done(function(data) {
-      console.log(data);
+    }).done((data) => {
+      console.dir(data);
+      __log(data.data);
     });
   });
+}
 
-  recorder.start();
-  console.log("Recorder Started");
+window.onload = function init() {
+  try {
+    // webkit shim
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
 
-  document.querySelector("#stopButton").addEventListener('click', () => {
-    console.log("stop");
-    recorder.stop();
+    __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+  } catch (e) {
+    alert('No web audio support in this browser!');
+  }
+  
+  navigator.getUserMedia({audio: true}, startUserMedia, (e) => {
+    __log('No live audio input: ' + e);
   });
+};
 
-  setTimeout(() => {
-    console.log("stop");
-    recorder.stop();
-  }, DURATION);
-}
+// window.onload = () => {
+//   try {
+//     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-const errorRecord = (error) => {
-  alert("error");
-}
+//     audio_context = new AudioContext;
+//     console.log('Audio context set up.');
+//     __log('Audio context set up.');
+//   } catch (e) {
+//     alert('No web audio support in this browser!');
+//   }
+
+//   navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
+//     getUserMedia: (c) => {
+//       return new Promise(function(y, n) {
+//         (navigator.mozGetUserMedia ||
+//          navigator.webkitGetUserMedia).call(navigator, c, y, n);
+//       });
+//     }
+//   } : null);
+
+//   navigator.mediaDevices.getUserMedia({audio: true})
+//     .then(startUserMedia)
+//     .catch((e) => {
+//       console.log('No live audio input: ' + e);
+//       __log('No live audio input: ' + e);
+//     });
+// }

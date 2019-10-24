@@ -1,5 +1,6 @@
 .vscode
 .DS_Store
+*.wav
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -126,3 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+sounds/sample.wav

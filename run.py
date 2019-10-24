@@ -1,10 +1,13 @@
 import json
+import socket
+
 from service import app
+
 
 with open('config.json', 'r') as f:
     conf = json.load(f)
 
-IP = conf['ip']
+IP = conf["ip"]
 Port = conf['port']
 debug = conf['debug']
 
