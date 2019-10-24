@@ -1,6 +1,7 @@
 .vscode
 .DS_Store
 *.wav
+node_modules/
 
 # nodejs
 
