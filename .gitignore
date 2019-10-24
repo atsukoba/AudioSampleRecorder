@@ -3,6 +3,8 @@
 *.wav
 node_modules/
 
+service/static/js/recorder.js
+
 # nodejs
 
 node_modules/
