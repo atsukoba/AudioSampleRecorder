@@ -33,7 +33,7 @@ echo "Check ngrok API tunnel..."
 
 sleep 5
 
-url=$(eval "curl localhost:4040/api/tunnels  | jq '.tunnels[0].public_url'")
+url=`eval "curl localhost:4040/api/tunnels  | jq '.tunnels[0].public_url'"`
 
 echo "URL is ${url}"
 python3 -c "import qr; qr.generate(${url})"
