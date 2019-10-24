@@ -1,14 +1,27 @@
 # AudioSampleCollector
 
+Audio recording on the Web using Web Audio API for remote real-time environmental sound collection
+
 ## packages
 
 https://www.npmjs.com/package/recorder-js
 
-## install and run
+## setup
+
+install
 
 ```shell
-bash ngrok-install.sh
+npm install
+sh ngrok-install.sh
 ```
+
+copy plugin to static dir
+
+```shell
+cp Recorderjs/dist/recorder.js service/static/js/
+```
+
+## run
 
 ```shell
 bash run.sh
