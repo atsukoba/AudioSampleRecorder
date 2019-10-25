@@ -4,6 +4,7 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: white;
+  font-family: 'Big Shoulders Text', cursive;
 }
 
 body section {
@@ -23,10 +24,19 @@ body section div.wrapper {
   padding: 15px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  text-align: center;
 }
 
 body section div.wrapper h2 {
   font-weight: lighter;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+body section div.wrapper a#dl {
+  text-align: center;
+  color: azure !important;
 }
 
 body section div.wrapper #log {
@@ -35,10 +45,15 @@ body section div.wrapper #log {
   border-radius: 15px;
   height: 100px;
   overflow: scroll;
+  text-align: left;
 }
 
 body section div.wrapper #log h2 {
   margin: 0;
   margin-bottom: 15px;
+}
+
+body section div.wrapper #log span {
+  display: block;
 }
 /*# sourceMappingURL=style.css.map */

@@ -3,6 +3,7 @@ body {
   height: 100vh;
   box-sizing: border-box;
   color: white;
+  font-family: 'Big Shoulders Text', cursive;
 
   section {
     width: 100%;
@@ -19,9 +20,18 @@ body {
       // background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAH0lEQVQYV2NkQAU+jEh8HwYGhi0wATAHJAkSgHNAAgBV7gNRSeLXuAAAAABJRU5ErkJggg==);
       padding: 15px;
       box-sizing: border-box;
+      text-align: center;
 
       h2 {
         font-weight: lighter;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+
+      a#dl {
+        text-align: center;
+        color: azure!important;
       }
     
       #log {
@@ -30,10 +40,15 @@ body {
         border-radius: 15px;
         height: 100px;
         overflow: scroll;
+        text-align: left;
 
         h2 {
           margin: 0;
           margin-bottom: 15px;
+        }
+
+        span {
+          display: block;
         }
       }
     }
