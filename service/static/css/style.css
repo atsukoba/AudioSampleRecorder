@@ -1,0 +1,44 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+}
+
+body section {
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body section div.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.49);
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body section div.wrapper h2 {
+  font-weight: lighter;
+}
+
+body section div.wrapper #log {
+  padding: 15px;
+  background-color: rgba(236, 236, 236, 0.37);
+  border-radius: 15px;
+  height: 100px;
+  overflow: scroll;
+}
+
+body section div.wrapper #log h2 {
+  margin: 0;
+  margin-bottom: 15px;
+}
+/*# sourceMappingURL=style.css.map */

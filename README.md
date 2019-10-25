@@ -28,3 +28,13 @@ bash run.sh
 ```
 
 and access the QR code
+
+## develop
+
+```
+npm run watch
+```
+
+## UI design
+
+<https://www.figma.com/file/nRi4YNe3WGXpCxocEcpN35/x-sampling-recorder?node-id=0%3A1>

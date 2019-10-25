@@ -15,7 +15,7 @@ class Shapes {
     return points;
   }
 
-  static square(size: number): p5.Vector[] {
+  static square(size: number): p5.Vector[] {  
     const points = new Array<p5.Vector>();
     // A square is a bunch of vertices along straight lines
     // Top of square

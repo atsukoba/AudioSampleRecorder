@@ -1,0 +1,41 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  color: white;
+
+  section {
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+
+    div.wrapper {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .49);
+      // background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAH0lEQVQYV2NkQAU+jEh8HwYGhi0wATAHJAkSgHNAAgBV7gNRSeLXuAAAAABJRU5ErkJggg==);
+      padding: 15px;
+      box-sizing: border-box;
+
+      h2 {
+        font-weight: lighter;
+      }
+    
+      #log {
+        padding: 15px;
+        background-color: rgba(236, 236, 236, .37);
+        border-radius: 15px;
+        height: 100px;
+        overflow: scroll;
+
+        h2 {
+          margin: 0;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}

@@ -6,41 +6,49 @@ let recorder : Recorder
 
 const __log = (e : string) => {
   let log : Element = document.querySelector("#log") || document.createElement("p")
-  log.innerHTML += "\n" + e
+  log.innerHTML += e + "\n"
+  console.log(e)
 }
 
 const startUserMedia = (stream : MediaStream) => {
   audio_context = new AudioContext
   __log('Audio context set up.')
   let input : AudioNode = audio_context.createMediaStreamSource(stream)
-  console.log('Media stream created.')
   __log('Media stream created.')
 
   // Uncomment if you want the audio to feedback directly
   // input.connect(audio_context.destination)
-  // console.log('Input connected to audio context destination.')
 
   //@ts-ignore
   recorder = new Recorder(input)
-  console.log('Recorder initialized.')
   __log('Recorder initialized.')
 }
 
 const startRecording = () => {
   recorder && recorder.record()
-  console.log('Recording...')
   __log('Recording...')
 }
-
 let startButton : Element = document.querySelector("#startButton") || document.createElement("div")
 startButton.addEventListener('click', startRecording)
 
+const stopRecording = () => {
+  recorder && recorder.stop()
+  __log('Stopped recording.')
+  // create WAV download link using audio data blob
+  createDownloadLink()
+}
+let stopButton : Element = document.querySelector("#stopButton") || document.createElement("div")
+stopButton.addEventListener('click', stopRecording)
+
 const createDownloadLink = () => {
-  console.dir("Sending Data...")
   __log("Sending Data...")
   recorder && recorder.exportWAV((blob : Blob) => {
+    let url = URL.createObjectURL(blob)
+    let dlLink = <HTMLAnchorElement>document.getElementById("dl")
+    dlLink.style.opacity = "1"
+    dlLink.href = url
+    dlLink.download = "sound.wav"
     let fd = new FormData()
-    console.log('set FormData')
     fd.append('data', blob)
     $.ajax({
       type: 'POST',
@@ -49,26 +57,13 @@ const createDownloadLink = () => {
       processData: false,
       contentType: false
     }).done((data) => {
-      console.log('response from server')
       __log(data.data)
-      console.dir(data)
       recorder.clear()
-      console.log('recorder object removed')
       }
     )
   })
 }
 
-const stopRecording = () => {
-  recorder && recorder.stop()
-  console.log('Stopped recording.')
-  __log('Stopped recording.')
-  // create WAV download link using audio data blob
-  createDownloadLink()
-}
-
-let stopButton : Element = document.querySelector("#stopButton") || document.createElement("div")
-stopButton.addEventListener('click', stopRecording)
 window.onload = function init() {
   try {
     // webkit shim
