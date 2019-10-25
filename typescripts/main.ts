@@ -6,7 +6,7 @@ let recorder : Recorder
 
 const __log = (e : string) => {
   let log : Element = document.querySelector("#log") || document.createElement("p")
-  log.innerHTML += e + "\n"
+  log.innerHTML = `<span>${e}</span>` + log.innerHTML
   console.log(e)
 }
 
@@ -57,7 +57,7 @@ const createDownloadLink = () => {
       processData: false,
       contentType: false
     }).done((data) => {
-      __log(data.data)
+      __log(`file saved : ${data.data}`)
       recorder.clear()
       }
     )
