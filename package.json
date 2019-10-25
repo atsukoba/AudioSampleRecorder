@@ -23,5 +23,9 @@
   "homepage": "https://github.com/atsukoba/AudioSampleCollector#readme",
   "dependencies": {
     "@types/jquery": "^3.3.31"
+  },
+  "devDependencies": {
+    "@types/p5": "^0.9.0",
+    "p5": "^0.10.2"
   }
 }
