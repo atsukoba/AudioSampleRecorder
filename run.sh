@@ -9,6 +9,9 @@ pip3 install -r requirements.txt
 
 tmux kill-server
 
+echo "copying recorder.js plugin"
+cp Recorderjs/dist/recorder.js service/static/js/
+
 echo "transpile typescript files"
 tsc
 
@@ -30,6 +33,7 @@ if !(type "ngrok" > /dev/null 2>&1); then
 else
   echo "Create tmux session for ngrok"  
   tmux new-session -d -s ngrok "ngrok http http://${ip}:${port}"
+  # tmux new-session -d -s serveo "ssh -R 80:${ip}:${port} serveo.net"
 fi
 
 echo "Check ngrok API tunnel..."
