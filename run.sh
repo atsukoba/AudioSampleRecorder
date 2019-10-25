@@ -15,9 +15,6 @@ cp Recorderjs/dist/recorder.js service/static/js/
 echo "transpile typescript files"
 tsc
 
-echo "Create tmux session for python api"
-tmux new-session -d -s flask 'python3 run.py'
-
 if !(type "jq" > /dev/null 2>&1); then
   echo "install jq..."
   brew install jq
@@ -27,6 +24,9 @@ ip=`jq '.ip' config.json`
 echo "IP address : ${ip}"
 port=`jq '.port' config.json`
 echo "port number: ${port}"
+
+echo "Create tmux session for python api"
+`tmux new-session -d -s server gunicorn service.app:app -b :${port}`
 
 if !(type "ngrok" > /dev/null 2>&1); then
   echo "install ngrok: exec ngrok-install.sh"

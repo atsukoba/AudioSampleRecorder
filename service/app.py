@@ -41,6 +41,7 @@ def play_wav_file(fname):  # talking mode
 
     p = pyaudio.PyAudio()
     print("talking: open audio stream")
+    print(f"taking: framerate={wf.getframerate()}")
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
