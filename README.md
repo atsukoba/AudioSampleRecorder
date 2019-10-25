@@ -1,4 +1,4 @@
-# AudioSampleCollector
+# AudioSampleRecorder
 
 Audio recording on the Web using Web Audio API for remote real-time environmental sound collection.
 
