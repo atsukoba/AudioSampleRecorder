@@ -2,3 +2,5 @@ flask
 flask-ngrok
 qrcode
 Image
+pyaudio
+gunicorn
