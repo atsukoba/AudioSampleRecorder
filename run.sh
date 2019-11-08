@@ -21,22 +21,32 @@ if !(type "jq" > /dev/null 2>&1); then
 fi
 
 ip=`jq '.ip' config.json`
-echo "IP address : ${ip}"
+echo "IP address : $ip"
 port=`jq '.port' config.json`
-echo "port number: ${port}"
+echo "port number: $port"
+
+# kill zombie gunicorn server
+pid=`ps ax | grep gunicorn | grep $port | awk '{split($0,a," "); print a[1]}' | head -n 1`
+if [ -z "$pid" ]; then
+  echo "No gunicorn deamon on port $port"
+else
+  kill $pid
+  echo "killed gunicorn deamon on port $port"
+fi
+
 
 echo "Create tmux session for python api"
-`tmux new-session -d -s server gunicorn service.app:app -b :${port}`
+`tmux new-session -d -s server gunicorn service.app:app -b :$port`
 
 if !(type "ngrok" > /dev/null 2>&1); then
   echo "install ngrok: exec ngrok-install.sh"
 else
   echo "Create tmux session for ngrok"  
-  tmux new-session -d -s ngrok "ngrok http http://${ip}:${port}"
+  tmux new-session -d -s ngrok "ngrok http $port"
   # tmux new-session -d -s serveo "ssh -R 80:${ip}:${port} serveo.net"
 fi
 
-echo "Check ngrok API tunnel..."
+echo "Waiting ngrok API tunnel..."
 
 sleep 5
 
