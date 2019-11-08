@@ -4,3 +4,4 @@ qrcode
 Image
 pyaudio
 gunicorn
+python-osc

@@ -19,6 +19,7 @@ git clone -r https://github.com/atsukoba/AudioSampleRecorder.git
 npm install
 sh ngrok-install.sh
 ```
+
 then put your ngrok auth-token
 
 ## run
@@ -49,10 +50,36 @@ share and access generated QR code !
 
 `.wav` files are saved in `sounds/`
 
+sound file path will be sent as osc message (to address `/`)
+
+## settings
+
+edit settings suitably.
+
+```json
+{
+    "ip" : "127.0.0.1",
+    "port" : 8888, // listening port number
+    "debug" : true,
+    "talking": false, // toggle talking mode
+    "workers": 2, // gunicorn worker for server
+    "use-osc": true, // send osc message when receive the sound
+    "osc-port": 5050 // osc poert number
+}
+```
+
 ## develop
 
-```
+front-end dev
+
+```shell
 npm run watch
+```
+
+check Python flask process
+
+```shell
+tmux a -t
 ```
 
 ## UI design
