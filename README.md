@@ -4,29 +4,43 @@ Audio recording on the Web using Web Audio API for remote real-time environmenta
 
 ![animation screenshot](https://i.gyazo.com/6825cb4c65c8d1c4e7f8f7a3a6a357d4.gif)
 
-## packages
+## packages/dependencies
 
-https://www.npmjs.com/package/recorder-js
+- python3 and packages listed in `requirements.txt`
+- nodejs and packages listed in `package.json`
+- tmux
+- ngrok
+- [recorder-js](https://www.npmjs.com/package/recorder-js)
 
 ## setup
 
-install
-
 ```shell
+git clone -r https://github.com/atsukoba/AudioSampleRecorder.git
 npm install
 sh ngrok-install.sh
 ```
-
-copy plugin to static dir
-
-```shell
-cp Recorderjs/dist/recorder.js service/static/js/
-```
+then put your ngrok auth-token
 
 ## run
 
+if using `pip` and `HomeBrew`, run this prepared script. if NOT, rewrite the script suitably (e.g. `pip` -> `conda`, `brew` -> `apt-get`).
+
 ```shell
 bash run.sh
+```
+
+when do not use tmux sessions, build a server, make a tunnel and generate qr code manually.
+
+```shell
+gunicorn service.app:app -b :YOUR_PORT_NUMBER
+```
+
+```shell
+ngrok http http://127.0.0.1:YOUR_PORT_NUMBER
+```
+
+```shell
+python -c "import qr; qr.generate(NGROK_DISTRIBUTED_URL)"
 ```
 
 share and access generated QR code !
