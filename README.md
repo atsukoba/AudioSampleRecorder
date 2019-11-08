@@ -54,9 +54,9 @@ sound file path will be sent as osc message (to address `/`)
 
 ## settings
 
-edit settings suitably.
+edit settings (`config.json`) suitably.
 
-```json
+```javascript
 {
     "ip" : "127.0.0.1",
     "port" : 8888, // listening port number
