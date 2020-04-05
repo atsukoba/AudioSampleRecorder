@@ -68,16 +68,16 @@ const createDownloadLink = () => {
 };
 
 window.onload = function init() {
+  let mediaDevicesInterface: any;
+  let nav = <any>navigator;
   try {
     //@ts-ignore
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     //@ts-ignore
-    var mediaDevicesInterface =
-      navigator.mediaDevices ||
-      navigator.mozGetUserMedia ||
-      navigator.webkitGetUserMedia;
+    mediaDevicesInterface =
+      nav.mediaDevices || nav.mozGetUserMedia || nav.webkitGetUserMedia;
     console.dir(mediaDevicesInterface);
-    if (!navigator.mediaDevices) {
+    if (!nav.mediaDevices) {
       __log("getUserMedia() not supported.");
       return;
     }
