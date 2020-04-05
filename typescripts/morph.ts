@@ -1,8 +1,7 @@
 //https://processing.org/examples/morph.html
 class Morph {
-
   // Arrays to store the vertices for the shapes
-  shapes: { points: p5.Vector[], color: p5.Color }[];
+  shapes: { points: p5.Vector[]; color: p5.Color }[];
   currentShape: number;
   // An array for the set of vertices beign drawn into the window
   morph: p5.Vector[];
@@ -10,13 +9,15 @@ class Morph {
   // This boolean variable will control if we are morphing to a circle or square
 
   setup() {
-
     // Setup shapes array
     this.shapes = [];
     this.currentShape = 0;
-    this.shapes.push({ points: Shapes.circle(100), color: color('#009CDF') });
+    this.shapes.push({ points: Shapes.circle(100), color: color("#009CDF") });
     this.shapes.push({ points: Shapes.circle(150), color: color(255, 204, 0) });
-    this.shapes.push({ points: Shapes.square(50), color: color(175, 100, 220) });
+    this.shapes.push({
+      points: Shapes.square(50),
+      color: color(175, 100, 220),
+    });
     // this.shapes.push({points: Shapes.star(p, 0, 0, 30, 70, 5), color: color('#E23838')});
 
     // setup morph array
@@ -49,7 +50,7 @@ class Morph {
 
     // If all the vertices are close, switch shape
     if (totalDistance < 0.1) {
-      this.currentShape++;//= !this.state;
+      this.currentShape++; //= !this.state;
       if (this.currentShape >= this.shapes.length) {
         this.currentShape = 0;
       }
@@ -76,7 +77,5 @@ class Morph {
     }
 
     endShape(CLOSE);
-
   }
-
 }
